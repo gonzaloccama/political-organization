@@ -47,6 +47,7 @@ class ChatMessagesComponent extends Component
             ->orWhere(function ($query) {
                 $query->orWhere(DB::raw("CONCAT(user_firstname, ' ', user_lastname)"), 'LIKE', '%' . $this->keyWord . '%');
             })
+            ->whereNotIn('user_group', [1])
             ->paginate($this->moreUsers);
 
         $data['sender'] = $this->sender;

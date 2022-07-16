@@ -3,9 +3,11 @@
         <nav class="navbar navbar-expand-lg navbar-light p-0">
             <div class="iq-navbar-logo d-flex justify-content-between">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/logos/logo.svg') }}" class="img-fluid" alt="Accion-regional"
-                         style="box-shadow: 0 0 2px 2px rgba(255,255,255,0.69);">
-                    <span class="text-white font-rajdhani-18" style="letter-spacing: -1px;">Acción Regional</span>
+                    <img src="{{ asset('assets/logos/') . '/' . $sttngs->logo }}" class="img-fluid" alt="Accion-regional"
+                         style="box-shadow: 0 0 2px 2px rgba(255,255,255,0.69); background-color: #fff;">
+                    <span class="text-white font-rajdhani-18 text-uppercase" style="letter-spacing: -1px;">
+                        {{ $sttngs->name }} {{ $sttngs->campus }}
+                    </span>
                 </a>
                 <div class="iq-menu-bt align-self-center">
                     <div class="wrapper-menu text-white">

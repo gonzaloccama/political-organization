@@ -11,7 +11,7 @@
     </div>
 
     <div class="card-body">
-        <h5 class="card-title text-muted text-uppercase">{{ $income }}</h5>
+        <h5 class="card-title text-muted text-uppercase">{{ $title }}</h5>
         <div class="separator mb-5"></div>
 
         <div class="card-body border">
@@ -19,8 +19,8 @@
 
                 <?php
                 $dt = [
-                    'name' => 'income',
-                    'text' => 'Ingreso',
+                    'name' => 'title',
+                    'text' => 'Título',
                     'required' => 1,
                     'type' => 'text',
                 ];
@@ -29,8 +29,8 @@
 
                 <?php
                 $dt = [
-                    'name' => 'note',
-                    'text' => 'Nota',
+                    'name' => 'abstract',
+                    'text' => 'Resumen',
                     'required' => 1,
 
                 ];
@@ -39,8 +39,18 @@
 
                 <?php
                 $dt = [
-                    'name' => 'amount',
-                    'text' => 'Monto',
+                    'name' => 'content',
+                    'text' => 'Contenido',
+                    'required' => 1,
+
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.textarea-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'population',
+                    'text' => 'Población',
                     'required' => 1,
                     'type' => 'text',
                 ];
@@ -49,8 +59,42 @@
 
                 <?php
                 $dt = [
-                    'name' => 'origin',
-                    'text' => 'Origen',
+                    'name' => 'region',
+                    'text' => 'Región',
+                    'required' => 1,
+                    'object' => 'name',
+                    'options' => \App\Models\Region::all()
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
+
+
+                <?php
+                $dt = [
+                    'name' => 'province',
+                    'text' => 'Provincia',
+                    'required' => 1,
+                    'object' => 'name',
+                    'options' => \App\Models\Region::find($region)->provinces ?? []
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'town',
+                    'text' => 'Distrito',
+                    'required' => 1,
+                    'object' => 'name',
+                    'options' => \App\Models\Province::find($province)->towns ?? []
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'location',
+                    'text' => 'Localización',
                     'required' => 1,
                     'type' => 'text',
                 ];
@@ -59,46 +103,30 @@
 
                 <?php
                 $dt = [
-                    'name' => 'representative',
-                    'text' => 'Representante',
-                    'required' => 1,
-                    'type' => 'text',
-                ];
-                ?>
-                @include('livewire.widgets.admin.form.input-h', $dt)
-
-                <?php
-                $dt = [
-                    'name' => 'attachment_file',
-                    'text' => 'Evidencia',
+                    'name' => 'file',
+                    'text' => 'Archivo',
                     'required' => 0,
                     'type' => 'file',
-                    'accept' => 'image',
-                    'file' => $attachment_file,
+                    'accept' => 'pdf',
+                    'file' => $file,
+//                    'preview' => $editFile,
                 ];
                 ?>
                 @include('livewire.widgets.admin.form.input-h', $dt)
 
-                <?php
-                $dt = [
-                    'name' => 'status',
-                    'text' => 'Estado de pago',
-                    'required' => 0,
-                    'type' => 'checkbox',
-                ];
-                ?>
-                @include('livewire.widgets.admin.form.input-h', $dt)
-
-                <?php
-                $dt = [
-                    'name' => 'is_recurrent',
-                    'text' => 'Recurrente',
-                    'required' => 0,
-                    'type' => 'checkbox',
-                ];
-                ?>
-                @include('livewire.widgets.admin.form.input-h', $dt)
-
+                    <?php
+                    $dt = [
+                        'name' => 'files',
+                        'text' => 'Imagenes',
+                        'required' => 0,
+                        'type' => 'file',
+                        'accept' => 'image',
+                        'file' => $files,
+                        'multiple' => 1,
+//                    'preview' => $editFile,
+                    ];
+                    ?>
+                    @include('livewire.widgets.admin.form.input-h', $dt)
 
             </form>
 

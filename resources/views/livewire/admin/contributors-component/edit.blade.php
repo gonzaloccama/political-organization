@@ -13,7 +13,7 @@
     <div class="card-body">
         <h5 class="card-title text-muted text-uppercase pt-0 mt-0 mb-4 title-nowrap">{{ $contributor->user->user_firstname . ' ' . $contributor->user->user_lastname }}</h5>
         <div class="separator mb-5"></div>
-        <div class="scroll">
+
             <div class="card-body border">
 
                 @include('livewire.admin.contributors-component.contributions.head-contributor', ['dt' => $contributor->user])
@@ -58,7 +58,7 @@
 {{--                    </button>--}}
                 </div>
             </div>
-        </div>
+
     </div>
 </div>
 

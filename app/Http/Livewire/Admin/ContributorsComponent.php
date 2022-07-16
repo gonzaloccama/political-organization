@@ -86,6 +86,11 @@ class ContributorsComponent extends BaseComponent
         'unit' => 'required',
     ];
 
+
+    protected $queryString = [
+        'itemId' => ['except' => null, 'as' => 'id'],
+    ];
+
     public function mount()
     {
         $this->limit = 10;
@@ -98,6 +103,10 @@ class ContributorsComponent extends BaseComponent
         $this->frame = 'index';
         $this->putContribution = null;
         $this->modal = null;
+
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $this->show($_GET['id']);
+        }
     }
 
     public function render()

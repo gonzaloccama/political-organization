@@ -32,11 +32,15 @@
 
     <a class="navbar-logo" href="{{ route('home') }}">
         <span class="d-none d-xs-block">
-            <img src="{{ asset('assets/logos/logo.svg') }}" alt="Accion Regional" style="height: 40px;">
+            <img src="{{ asset('assets/logos/') . '/' . $sttngs->logo }}"
+                 alt="{{ $sttngs->name . ' ' . $sttngs->campus }}"
+                 style="height: 40px; background-color: #fff; border-radius: 3px">
 {{--            <span>Acción Regional</span>--}}
         </span>
         <span class="d-block d-xs-none">
-            <img src="{{ asset('assets/logos/logo.svg') }}" alt="Accion Regional" style="height: 40px;">
+            <img src="{{ asset('assets/logos/'). '/' . $sttngs->logo }}"
+                 alt="{{ $sttngs->name . ' ' . $sttngs->campus }}"
+                 style="height: 40px; background-color: #fff; border-radius: 3px">
 {{--            <span>Acción Regional</span>--}}
         </span>
     </a>
@@ -91,67 +95,69 @@
 
                 </div>
             </div>
-
-            <div class="position-relative d-inline-block">
-                <button class="header-icon btn btn-empty" type="button" id="notificationButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="simple-icon-bell"></i>
-                    <span class="count">3</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right mt-3 position-absolute" id="notificationDropdown">
-                    <div class="scroll">
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/profiles/l-2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
+            @if(0)
+                <div class="position-relative d-inline-block">
+                    <button class="header-icon btn btn-empty" type="button" id="notificationButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="simple-icon-bell"></i>
+                        <span class="count">3</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right mt-3 position-absolute" id="notificationDropdown">
+                        <div class="scroll">
+                            <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                                 <a href="#">
-                                    <p class="font-weight-medium mb-1">Joisse Kaycee just sent a new comment!</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    <img src="{{ asset('assets/img/profiles/l-2.jpg') }}" alt="Notification Image"
+                                         class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                                 </a>
+                                <div class="pl-3">
+                                    <a href="#">
+                                        <p class="font-weight-medium mb-1">Joisse Kaycee just sent a new comment!</p>
+                                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/notifications/1.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
+                            <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                                 <a href="#">
-                                    <p class="font-weight-medium mb-1">1 item is out of stock!</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    <img src="{{ asset('assets/img/notifications/1.jpg') }}" alt="Notification Image"
+                                         class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                                 </a>
+                                <div class="pl-3">
+                                    <a href="#">
+                                        <p class="font-weight-medium mb-1">1 item is out of stock!</p>
+                                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/notifications/2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
+                            <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                                 <a href="#">
-                                    <p class="font-weight-medium mb-1">New order received! It is total $147,20.</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    <img src="{{ asset('assets/img/notifications/2.jpg') }}" alt="Notification Image"
+                                         class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                                 </a>
+                                <div class="pl-3">
+                                    <a href="#">
+                                        <p class="font-weight-medium mb-1">New order received! It is total $147,20.</p>
+                                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 ">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/notifications/3.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
+                            <div class="d-flex flex-row mb-3 pb-3 ">
                                 <a href="#">
-                                    <p class="font-weight-medium mb-1">3 items just added to wish list by a user!
-                                    </p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    <img src="{{ asset('assets/img/notifications/3.jpg') }}" alt="Notification Image"
+                                         class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                                 </a>
+                                <div class="pl-3">
+                                    <a href="#">
+                                        <p class="font-weight-medium mb-1">3 items just added to wish list by a user!
+                                        </p>
+                                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
+
 
             <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton">
                 <i class="simple-icon-size-fullscreen"></i>

@@ -27,6 +27,8 @@ class BaseComponent extends Component
     public $deleteId;
     public $itemId;
 
+    public $image_path;
+
 
     public function updatePagination($size = 0)
     {

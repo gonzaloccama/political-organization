@@ -12,7 +12,7 @@
                 <span class="text-small mt-0 font-italic">
                     Mostrando {{ $c = $contributor->cashContribution->count() }} {{ $c == 1 ? 'elemento' : 'elementos' }}
                 </span>
-                <div class="scrollbar scroller" style="height: 320px;">
+                <div class="scrollbar scroller" style="height: 320px; font-size:10px">
                     <?php
                     $hdrs = [
                         'id' => '#',
@@ -43,7 +43,7 @@
                 <span class="text-small mt-0 font-italic">
                     Mostrando {{ $c = $contributor->materialContribution->count() }} {{ $c == 1 ? 'elemento' : 'elementos' }}
                 </span>
-                <div class="scrollbar scroller" style="height: 320px;">
+                <div class="scrollbar scroller" style="height: 320px;font-size:10px">
                     <?php
                     $hdrs = [
                         'id' => '#',

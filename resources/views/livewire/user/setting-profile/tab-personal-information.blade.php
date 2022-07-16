@@ -195,11 +195,15 @@
                     style="font-weight: 500">Dirección</h4>
 
                 <?php
-                $regions = \App\Models\Departamento::all();
+                $regions = \App\Models\Region::all();
 
                 $provinces = [];
+                $towns = [];
                 if ($user_region) {
-                    $provinces = json_decode(\App\Models\Departamento::find($user_region)->province);
+                    $provinces = \App\Models\Region::find($user_region)->provinces;
+                }
+                if ($user_province){
+                    $towns = \App\Models\Province::find($user_province)->towns;
                 }
                 ?>
 
@@ -231,7 +235,7 @@
                                         wire:model="user_region">
                                     <option value="">Seleccionar...</option>
                                     @foreach($regions as $region)
-                                        <option value="{{ $region->id }}">{{ $region->region }}</option>
+                                        <option value="{{ $region->id }}">{{ $region->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('user_region')
@@ -251,10 +255,30 @@
                                         id="user_province" wire:model="user_province">
                                     <option value="">Seleccionar...</option>
                                     @foreach($provinces as $province)
-                                        <option value="{{ $province }}">{{ $province }}</option>
+                                        <option value="{{ $province->id }}">{{ $province->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('user_province')
+                                <div class="text-danger text-errors font-italic" style="font-size: 11px;">
+                                    {!! $message !!}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                class="control-label col-sm-4 align-self-center pt-0 text-md-right font-rajdhani-16 uppercase"
+                                for="user_current_city">Distrito:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control @error('user_current_city') is-invalid @enderror"
+                                        id="user_current_city" wire:model="user_current_city">
+                                    <option value="">Seleccionar...</option>
+                                    @foreach($towns as $town)
+                                        <option value="{{ $town->id }}">{{ $town->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('user_current_city')
                                 <div class="text-danger text-errors font-italic" style="font-size: 11px;">
                                     {!! $message !!}
                                 </div>

@@ -184,6 +184,8 @@ class ProjectComponent extends BaseComponent
         $this->itemId = $id;
         $data = Project::where('id', $this->itemId)->first();
 
+
+
         $this->title = $data->title;
         $this->summary = $data->summary;
         $this->description = $data->description;

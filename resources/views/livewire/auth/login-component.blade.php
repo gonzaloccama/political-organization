@@ -3,22 +3,21 @@
         {{ $_title }}
     @endpush
     <div class="col-12 col-md-10 mx-auto my-auto">
-        <div class="card auth-card">
-            <div class="position-relative image-side">
+        <div class="card auth-card rounded-0 shadow-lg">
+            <div class="position-relative image-side rounded-0">
 
                 <div class="text-white p-3"
-                     style="background-color: rgba(6,8,24,0.51) !important; font-weight: 700; border: 1px solid rgba(255,255,255,0.18);"
-                >
+                     style="background-color: rgba(6,8,24,0.51) !important; font-weight: 700; border: 1px solid rgba(255,255,255,0.18);">
 
                     <div class='text-center'>
-                        <img src='{{ asset('assets/logos/logo.svg') }}'
+                        <img src='{{ asset('assets/logos/') . '/' . $sttngs->logo }}'
                              style='width: 80px !important; box-shadow: 0 0 15px 0 rgba(255,255,255,0.28);'
                              alt=""/>
                         <div class="separator pt-2" style="border-color: rgba(255,255,255,0.18);"></div>
-                        <div class="pt-2 pl-2">
-                            <p class="h5">MOVIMIENTO</p>
+                        <div class="pt-2 pl-2 text-uppercase">
+                            <p class="h5">{{ $sttngs->name }}</p>
 
-                            <span class="h3">ACCIÓN REGIONAL</span>
+                            <span class="h3">{{ $sttngs->campus }}</span>
                         </div>
                     </div>
                     <p class="white mb-0 pt-3 text-right">
@@ -30,44 +29,47 @@
                 {{--                    --}}
                 {{--                </p>--}}
             </div>
-            <div class="form-side">
 
-                <h6 class="mb-4">Iniciar sesión</h6>
-                <form>
-                    <?php
-                    $dt = [
-                        'name' => 'email',
-                        'text' => 'Correo Electrónico',
-                        'type' => 'text',
-                        'required' => 1,
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-float', $dt)
+            @if($panel)
+                @include('livewire.auth.' . $panel)
+            @endif
 
-                    <?php
-                    $dt = [
-                        'name' => 'password',
-                        'text' => 'Contraseña',
-                        'type' => 'password',
-                        'required' => 1,
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-float', $dt)
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a href="#">¿Contraseña olvidada?</a>
-                        <button class="btn btn-primary btn-lg btn-shadow" wire:click.prevent="login" type="submit">
-                            Iniciar sesión
-                        </button>
-                    </div>
-                </form>
-
-                @if($message = Session::get('error'))
-                    <div class="alert alert-danger mt-3">
-                        {{ $message }}
-                    </div>
-                @endif
-            </div>
+            {{--            @if($currentUrl == route('login'))--}}
+            {{--                @include('livewire.auth.google')--}}
+            {{--            @else--}}
+            {{--                @include('livewire.auth.admin')--}}
+            {{--            @endif--}}
         </div>
     </div>
 </div>
+
+@push('styles')
+    <style>
+        .icon-google {
+            font-size: calc(14px + (13 - 12) * ((100vw - 360px) / (1600 - 320))) !important;;
+            padding: calc(7px + 5 * ((100vw - 320px) / 780)) !important;
+            color: #646464 !important
+        }
+
+        .icon-google:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            outline-width: 0
+        }
+
+        .btn-icon-google {
+            border: 1px solid #646464;
+            background-color: transparent;
+            border-radius: 0;
+            letter-spacing: 1px;
+            width: 80%;
+        }
+
+        .btn-icon-google:hover {
+            background-color: #3c79e6;
+            color: #fff !important;
+            border: 1px solid #3c79e6;
+        }
+    </style>
+@endpush

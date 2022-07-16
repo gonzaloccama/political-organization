@@ -3,21 +3,21 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-6">
-                    <p class="mb-0 text-muted">Acción Regional 2021</p>
+                    <p class="mb-0 text-muted text-uppercase">{{ $sttngs->name }} {{ $sttngs->campus }} {{ Carbon\Carbon::today()->year }}</p>
                 </div>
-{{--                <div class="col-sm-6 d-none d-sm-block">--}}
-{{--                    <ul class="breadcrumb pt-0 pr-0 float-right">--}}
-{{--                        <li class="breadcrumb-item mb-0">--}}
-{{--                            <a href="#" class="btn-link">Review</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="breadcrumb-item mb-0">--}}
-{{--                            <a href="#" class="btn-link">Purchase</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="breadcrumb-item mb-0">--}}
-{{--                            <a href="#" class="btn-link">Docs</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
+                {{--                <div class="col-sm-6 d-none d-sm-block">--}}
+                {{--                    <ul class="breadcrumb pt-0 pr-0 float-right">--}}
+                {{--                        <li class="breadcrumb-item mb-0">--}}
+                {{--                            <a href="#" class="btn-link">Review</a>--}}
+                {{--                        </li>--}}
+                {{--                        <li class="breadcrumb-item mb-0">--}}
+                {{--                            <a href="#" class="btn-link">Purchase</a>--}}
+                {{--                        </li>--}}
+                {{--                        <li class="breadcrumb-item mb-0">--}}
+                {{--                            <a href="#" class="btn-link">Docs</a>--}}
+                {{--                        </li>--}}
+                {{--                    </ul>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </div>

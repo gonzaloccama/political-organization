@@ -9,8 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -58,7 +57,7 @@ class User extends Authenticatable
 
     public function u_region()
     {
-        return $this->belongsTo(Departamento::class, 'user_region');
+        return $this->belongsTo(Region::class, 'user_region');
     }
 
     public function u_gender()

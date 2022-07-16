@@ -1,10 +1,13 @@
-<!doctype html>
+<?php
+$sttngs = \App\Models\SystemSetting::find(1);
+?>
+    <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> @stack('title') | Social | {{ config('app.name', 'ACCIÓN REGIONAL') }}</title>
+    <title> @stack('title') | Social | {{ config('app.name', $sttngs->name) }}</title>
     <meta name="robots" content="index, follow"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -28,8 +31,8 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/baguetteBox/baguetteBox.css') }}">
 
     <!-- Begin emoji-picker Stylesheets -->
-{{--    <link href="{{ asset('assets/plugins/emoji/css/emoji.css" rel="stylesheet') }}">--}}
-    <!-- End emoji-picker Stylesheets -->
+    {{--    <link href="{{ asset('assets/plugins/emoji/css/emoji.css" rel="stylesheet') }}">--}}
+<!-- End emoji-picker Stylesheets -->
 
     {{--    <link href="{{ asset('assets/admin/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css"/>--}}
 

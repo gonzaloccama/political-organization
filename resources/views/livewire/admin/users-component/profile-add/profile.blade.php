@@ -1,147 +1,143 @@
 <div class="tab-pane fade show active">
-    <form action="">
-        <div class="separator mb-5"></div>
-        <h4 class="mb-5 mt-4 text-muted">IDENTIFICACIÓN</h4>
-        <div class="form-row">
 
-            <div class="form-group col-md-6">
-                <label for="user_dni">DNI</label>
-                <div class="input-group mb-1" wire:ignore>
-                    <input type="text" class="form-control" aria-label="DNI" id="user_dni"
-                           placeholder="DNI" wire:model="user_dni" aria-describedby="button-dni">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button"
-                                wire:click.prevent="searchData"
-                                id="button-dni">Buscar...
-                        </button>
-                    </div>
-                </div>
-                @error('user_dni')
-                <span class="text-danger text-error text-small font-italic">
-                        <i class="simple-icon-info"></i> {!! $message !!}
-                    </span>
-                @enderror
-            </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-none border rounded-0 p-4">
 
-        </div>
+                <?php
+                $dt = [
+                    'name' => 'user_dni',
+                    'text' => 'DNI',
+                    'required' => 1,
+                    'function' => 'searchData'
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-button-h', $dt)
 
-        <div class="separator mb-5"></div>
-        <h4 class="mb-4 mt-4 text-muted">INFORMACIÓN BASICA</h4>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="user_firstname">Nombres</label>
-                <input type="text" class="form-control" id="user_firstname"
-                       placeholder="Nombres" wire:model="user_firstname">
-                @error('user_firstname')
-                <span class="text-danger text-error text-small font-italic">
-                    <i class="simple-icon-info"></i> {!! $message !!}
-                </span>
-                @enderror
-            </div>
-            <div class="form-group col-md-6">
-                <label for="user_lastname">Apellidos</label>
-                <input type="text" class="form-control" id="user_lastname"
-                       placeholder="Apellidos" wire:model="user_lastname">
-                @error('user_lastname')
-                <span class="text-danger text-error text-small font-italic">
-                    <i class="simple-icon-info"></i> {!! $message !!}
-                </span>
-                @enderror
-            </div>
-        </div>
+                <?php
+                $dt = [
+                    'name' => 'user_firstname',
+                    'text' => 'Nombres',
+                    'required' => 1,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="user_gender">Sexo</label>
-                <select id="user_gender" class="form-control" wire:model="user_gender">
-                    <option value="0">Seleccionar...</option>
-                    @foreach($genders as $gender)
-                        <option value="{{ $gender->id }}">{{ $gender->gender }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="user_relationship">Estado civil</label>
-                <select id="user_relationship" class="form-control"
-                        wire:model="user_relationship">
-                    <option value="0">Seleccionar...</option>
-                    @foreach($relationships as $relationship)
-                        <option value="{{ $relationship->id }}">{{ $relationship->marital_status }}</option>
-                    @endforeach
-                </select>
+                <?php
+                $dt = [
+                    'name' => 'user_lastname',
+                    'text' => 'Apellidos',
+                    'required' => 1,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'user_gender',
+                    'text' => 'Sexo',
+                    'required' => 0,
+                    'object' => 'gender',
+                    'options' => $genders
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'user_relationship',
+                    'text' => 'Estado civil',
+                    'required' => 0,
+                    'object' => 'marital_status',
+                    'options' => $relationships
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'user_birthdate',
+                    'text' => 'Cumpleaños',
+                    'required' => 0,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
+
             </div>
         </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <div class="card shadow-none border rounded-0 p-4">
 
-        <div class="form-group">
-            <label for="user_birthdate">Fecha de nacimiento</label>
-            <input type="text" class="form-control" id="user_birthdate"
-                   wire:model="user_birthdate" placeholder="Fecha de nacimiento">
-        </div>
+                <?php
+                $dt = [
+                    'name' => 'user_biography',
+                    'text' => 'Biografía',
+                    'required' => 0,
+                    'no_ignore' => 1,
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.textarea-h', $dt)
 
-        <div class="form-group">
-            <label for="user_biography">Sobre mí</label>
-            <textarea type="text" class="form-control" id="user_biography"
-                      wire:model="user_biography"
-                      placeholder="Biografía"> </textarea>
-        </div>
+                <?php
+                $dt = [
+                    'name' => 'user_address',
+                    'text' => 'Dirección',
+                    'required' => 0,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
-        <div class="separator mb-5"></div>
-        <h4 class="mb-5 mt-4 text-muted">UBICACIÓN</h4>
+                <?php
+                $dt = [
+                    'name' => 'user_region',
+                    'text' => 'Región',
+                    'required' => 0,
+                    'object' => 'name',
+                    'options' => $regions
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
 
-        <div class="form-group row">
-            <label for="user_address" class="col-sm-3 col-form-label">Dirección</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="user_address"
-                       wire:model="user_address"
-                       placeholder="Jr. Bolivar #321 - Ubanización Manco Ccapa, Azangaro">
+                <?php
+                $p = null;
+                $t = null;
+
+                if ($user_region) {
+                    $p = \App\Models\Region::find($user_region);
+                }
+                if ($user_province) {
+                    $t = \App\Models\Province::find($user_province);
+                }
+                ?>
+
+                <?php
+                $dt = [
+                    'name' => 'user_province',
+                    'text' => 'Provincia',
+                    'required' => 0,
+                    'object' => 'name',
+                    'options' => $p->provinces ?? []
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'user_current_city',
+                    'text' => 'Distrito',
+                    'required' => 0,
+                    'object' => 'name',
+                    'options' => $t->towns ?? []
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.select-h', $dt)
             </div>
         </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="user_region" class="col-sm-3 col-form-label">Región</label>
-            <div class="col-sm-9">
-                <select id="user_region" class="form-control" wire:model="user_region">
-                    <option value="0">Seleccionar...</option>
-                    @foreach($regions as $dep)
-                        <option value="{{ $dep->id }}">{{ $dep->region }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        @php
-            if ($user_region) {
-                $provincias = \App\Models\Departamento::where('id', $user_region)->first();
-            }
-        @endphp
-
-        <div class="form-group row">
-            <label for="user_province" class="col-sm-3 col-form-label">Provincia</label>
-            <div class="col-sm-9">
-                <select id="user_province" class="form-control" wire:model="user_province">
-                    <option value="0">Seleccionar...</option>
-                    @if($provincias)
-                        @foreach(json_decode($provincias->province) as $prov)
-                            <option value="{{ $prov }}">{{ $prov }}</option>
-                        @endforeach
-                    @endif
-                </select>
-            </div>
-        </div>
-
-        <div class="separator mb-5"></div>
-
-        <div class="text-right">
-            <button class="btn btn-secondary btn-sm"
-                    wire:click.prevent="closeFrame">
-                <b><i class="simple-icon-logout"></i>&nbsp;&nbsp;Regresar</b>
-            </button>
-
-            <button type="submit" class="btn btn-secondary btn-sm"
-                    wire:click.prevent="saveData">
-                <b><i class="iconsminds-save"></i>&nbsp;&nbsp;Guardar</b>
-            </button>
-        </div>
-    </form>
 </div>
 

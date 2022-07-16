@@ -55,6 +55,7 @@ class SettingProfile extends Component
         'user_address' => '<b><ins>Dirección</ins></b>',
         'user_region' => '<b><ins>Región</ins></b>',
         'user_province' => '<b><ins>Provincia</ins></b>',
+        'user_current_city' => '<b><ins>Distrito</ins></b>',
         'user_birthdate' => '<b><ins>Cumpleaños</ins></b>',
         'user_relationship' => '<b><ins>Estado civil</ins></b>',
         'user_biography' => '<b><ins>Biografía</ins></b>',
@@ -79,6 +80,7 @@ class SettingProfile extends Component
         'user_address' => 'nullable',
         'user_region' => 'nullable',
         'user_province' => 'nullable',
+        'user_current_city' => 'nullable',
         'user_birthdate' => 'nullable|date_format:Y-m-d',
         'user_relationship' => 'nullable',
         'user_biography' => 'nullable|min:40|max:560',
@@ -137,6 +139,7 @@ class SettingProfile extends Component
                 $this->user_address = $data->user_address;
                 $this->user_region = $data->user_region;
                 $this->user_province = $data->user_province;
+                $this->user_current_city = $data->user_current_city;
 
             } elseif ($this->tab_pane == 'links-social') {
 
@@ -198,6 +201,7 @@ class SettingProfile extends Component
                 $data->user_address = $this->user_address;
                 $data->user_region = $this->user_region;
                 $data->user_province = $this->user_province;
+                $data->user_current_city = $this->user_current_city;
 
             } elseif ($profile == 'chang-pwd') {
 
@@ -291,10 +295,10 @@ class SettingProfile extends Component
         $this->user_country = null;
         $this->user_region = null;
         $this->user_province = null;
+        $this->user_current_city = null;
         $this->user_birthdate = null;
         $this->user_relationship = null;
         $this->user_biography = null;
-        $this->user_current_city = null;
         $this->user_social_facebook = null;
         $this->user_social_whatsapp = null;
         $this->user_privacy_gender = null;

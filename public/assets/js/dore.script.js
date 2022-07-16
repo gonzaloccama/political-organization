@@ -1,4 +1,4 @@
-/* Dore Main Script 
+/* Dore Main Script
 
 Table of Contents
 
@@ -40,7 +40,7 @@ Table of Contents
   03.33. Showing Body
   03.34. Keyboard Shortcuts
   03.35. Context Menu
-  03.36. Select from Library 
+  03.36. Select from Library
   03.37. Feedback
   03.38. Smart Wizard
   03.39. Countdown
@@ -456,7 +456,8 @@ $.dore = function (element, options) {
 
         function setMenuClassNames(clickIndex, calledFromResize, link) {
             menuClickCount = clickIndex;
-            var container = $("#app-container");
+            //add class in ID
+            var container = $("#app-container").addClass("menu-default menu-sub-hidden sub-hidden");;
             if (container.length == 0) {
                 return;
             }
@@ -4388,6 +4389,78 @@ $.dore = function (element, options) {
                             perView: 2
                         },
                         320: {
+                            perView: 1
+                        }
+                    }
+                }).mount();
+            }
+
+            if ($(".glide.dashboard-income").length > 0) {
+                new Glide(".glide.dashboard-income", {
+                    bound: true,
+                    rewind: false,
+                    perView: 4,
+                    perTouch: 1,
+                    focusAt: 0,
+                    startAt: 0,
+                    direction: direction,
+                    gap: 7,
+                    breakpoints: {
+                        1800: {
+                            perView: 3
+                        },
+                        840: {
+                            perView: 2
+                        },
+                        480: {
+                            perView: 1
+                        }
+                    }
+                }).mount();
+            }
+
+            if ($(".glide.dashboard-expense").length > 0) {
+                new Glide(".glide.dashboard-expense", {
+                    bound: true,
+                    rewind: false,
+                    perView: 4,
+                    perTouch: 1,
+                    focusAt: 0,
+                    startAt: 0,
+                    direction: direction,
+                    gap: 7,
+                    breakpoints: {
+                        1800: {
+                            perView: 3
+                        },
+                        840: {
+                            perView: 2
+                        },
+                        480: {
+                            perView: 1
+                        }
+                    }
+                }).mount();
+            }
+
+            if ($(".glide.dashboard-users").length > 0) {
+                new Glide(".glide.dashboard-users", {
+                    bound: true,
+                    rewind: false,
+                    perView: 4,
+                    perTouch: 1,
+                    focusAt: 0,
+                    startAt: 0,
+                    direction: direction,
+                    gap: 7,
+                    breakpoints: {
+                        1800: {
+                            perView: 3
+                        },
+                        840: {
+                            perView: 2
+                        },
+                        480: {
                             perView: 1
                         }
                     }

@@ -275,7 +275,7 @@
     }
 
     .select2-container--material .select2-selection--single .select2-selection__placeholder {
-        color: #484848;
+        color: #8d8d8d;
     }
 
     .select2-container--material .select2-selection--single .select2-selection__arrow {

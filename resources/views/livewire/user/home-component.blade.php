@@ -100,5 +100,12 @@ $profile = auth()->user()->user_cover ? auth()->user()->user_cover : $img;
                 }
             };
         });
+
+        $("textarea.media-comment").each(function () {
+            this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+        }).on("input", function () {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+        });
     </script>
 @endpush

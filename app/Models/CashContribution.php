@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CashContribution extends Model
+class CashContribution extends BaseModel
 {
     use HasFactory;
+
+    protected $table = 'cash_contributions';
 
     public function contributor()
     {

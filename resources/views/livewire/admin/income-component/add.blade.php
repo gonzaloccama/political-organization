@@ -11,104 +11,112 @@
     </div>
 
     <div class="card-body">
-        <h5 class="card-title text-muted text-uppercase">{{ $reference }}</h5>
+        <h5 class="card-title text-muted text-uppercase">{{ $income }}</h5>
         <div class="separator mb-5"></div>
-        <div class="scroll">
-            <div class="card-body border">
-                <form action="">
 
-                    <?php
-                    $dt = [
-                        'name' => 'reference',
-                        'text' => 'Referencia',
-                        'required' => 1,
-                        'type' => 'text',
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-h', $dt)
+        <div class="card-body border">
+            <form action="">
 
-                    <?php
-                    $dt = [
-                        'name' => 'description',
-                        'text' => 'Description',
-                        'required' => 1,
+                <?php
+                $dt = [
+                    'name' => 'income',
+                    'text' => 'Ingreso',
+                    'required' => 1,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.textarea-h', $dt)
+                <?php
+                $dt = [
+                    'name' => 'note',
+                    'text' => 'Nota',
+                    'required' => 1,
 
-                    <?php
-                    $dt = [
-                        'name' => 'amount',
-                        'text' => 'Monto',
-                        'required' => 1,
-                        'type' => 'text',
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-h', $dt)
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.textarea-h', $dt)
 
-                    <?php
-                    $dt = [
-                        'name' => 'through',
-                        'text' => 'A cargo',
-                        'required' => 1,
-                        'object' => 'fullname',
-                        'options' => \App\Models\User::select('users.*')
-                            ->selectRaw('CONCAT(users.user_firstname," ",users.user_lastname) as fullname')
-                            ->get()
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.select-h', $dt)
+                <?php
+                $dt = [
+                    'name' => 'amount',
+                    'text' => 'Monto',
+                    'required' => 1,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
-                    <?php
-                    $dt = [
-                        'name' => 'attachment_file',
-                        'text' => 'Evidencia',
-                        'required' => 0,
-                        'type' => 'file',
-                        'accept' => 'image',
-                        'file' => $attachment_file,
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-h', $dt)
+                <?php
+                $dt = [
+                    'name' => 'origin',
+                    'text' => 'Origen',
+                    'required' => 1,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
-                    <?php
-                    $dt = [
-                        'name' => 'status',
-                        'text' => 'Estado de pago',
-                        'required' => 0,
-                        'type' => 'checkbox',
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-h', $dt)
+                <?php
+                $dt = [
+                    'name' => 'representative',
+                    'text' => 'Representante',
+                    'required' => 1,
+                    'type' => 'text',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
-                    <?php
-                    $dt = [
-                        'name' => 'is_recurrent',
-                        'text' => 'Recurrente',
-                        'required' => 0,
-                        'type' => 'checkbox',
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-h', $dt)
+                <?php
+                $dt = [
+                    'name' => 'attachment_file',
+                    'text' => 'Evidencia',
+                    'required' => 0,
+                    'type' => 'file',
+                    'accept' => 'image',
+                    'file' => $attachment_file,
+
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'status',
+                    'text' => 'Estado de pago',
+                    'required' => 0,
+                    'type' => 'checkbox',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
+
+                <?php
+                $dt = [
+                    'name' => 'is_recurrent',
+                    'text' => 'Recurrente',
+                    'required' => 0,
+                    'type' => 'checkbox',
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
 
-                </form>
+            </form>
 
-                <div class="separator mb-5 mt-5"></div>
+            <div class="separator mb-5 mt-5"></div>
 
-                <div class="text-right">
-                    <button class="btn btn-secondary btn-sm"
-                            wire:click.prevent="closeFrame">
-                        <b><i class="simple-icon-logout"></i>&nbsp;&nbsp;Regresar</b>
-                    </button>
+            <div class="text-right">
+                <button class="btn btn-secondary btn-sm"
+                        wire:click.prevent="closeFrame">
+                    <b><i class="simple-icon-logout"></i>&nbsp;&nbsp;Regresar</b>
+                </button>
 
-                    <button type="submit" class="btn btn-secondary btn-sm"
-                            wire:click.prevent="saveData">
-                        <b><i class="iconsminds-save"></i>&nbsp;&nbsp;Guardar</b>
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-secondary btn-sm"
+                        wire:click.prevent="saveData">
+                    <b><i class="iconsminds-save"></i>&nbsp;&nbsp;Guardar</b>
+                </button>
             </div>
         </div>
+
     </div>
 </div>

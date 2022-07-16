@@ -16,10 +16,11 @@ class CreateUsersSessionsTable extends Migration
         Schema::create('users_sessions', function (Blueprint $table) {
             $table->id();
             $table->string('session_token');
-            $table->dateTime('session_date');
+//            $table->dateTime('session_date');
             $table->bigInteger('user_id', false, true);
             $table->string('user_browser', 42);
             $table->string('user_os', 42);
+            $table->string('user_device', 42)->nullable();
             $table->string('user_ip', 42);
             $table->timestamps();
 

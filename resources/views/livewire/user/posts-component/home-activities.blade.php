@@ -48,17 +48,27 @@
     </div>
     <div class="iq-card">
         <?php
-//        $birthdates = \App\Models\User::paginate(5);
-        $date = now();
-        $birthdates = \App\Models\User::whereMonth('user_birthdate', '>', $date->month)
-            ->orWhere(function ($query) use ($date) {
-                $query->whereMonth('user_birthdate', '=', $date->month)
-                    ->whereDay('user_birthdate', '>=', $date->day);
-            })
-            ->orderByRaw("DAYOFMONTH('user_birthdate')",'ASC')
+        //        $birthdates = \App\Models\User::paginate(5);
+        //        $date = now();
+        //        $birthdates = \App\Models\User::whereMonth('user_birthdate', '>', $date->month)
+        //            ->orWhere(function ($query) use ($date) {
+        //                $query->whereMonth('user_birthdate', '=', $date->month)
+        //                    ->whereDay('user_birthdate', '>=', $date->day);
+        //            })
+        //            ->orderByRaw("DAYOFMONTH('user_birthdate')",'ASC')
+        //            ->take(10)
+        //            ->get();
+
+        $today = Carbon\Carbon::now();
+        $futureDays = $today->addDays(7);
+
+        $birthdays = \App\Models\User::whereMonth('user_birthdate', '>=', $today->month)
+            ->whereDay('user_birthdate', '<=', $futureDays->day)
+            ->orderBy('user_birthdate', 'ASC')
             ->take(10)
             ->get();
         ?>
+{{--        {{ $birthdays }}--}}
         <div class="iq-card-header d-flex justify-content-between">
             <div class="iq-header-title">
                 <h4 class="card-title font-rajdhani uppercase weight-500">Próximo cumpleaños</h4>
@@ -66,7 +76,7 @@
         </div>
         <div class="iq-card-body">
             <ul class="media-story m-0 p-0">
-                @foreach($birthdates as $birthdate)
+                @foreach($birthdays as $birthdate)
                     <?php
                     $img = $birthdate->user_gender == 2 ? 'woman.svg' : 'man.svg';
                     $profile = $birthdate->user_cover ? $birthdate->user_cover : $img;

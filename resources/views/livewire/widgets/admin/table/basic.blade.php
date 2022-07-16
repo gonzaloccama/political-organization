@@ -1,10 +1,10 @@
 <div class="border" style="border-color: grey;">
     <?php
-    $money = ['price', 'total', 'subtotal'];
-    $fld = ['not', 'status', 'image', 'user_activated', 'progress'];
+    $money = ['price', 'total', 'subtotal', 'amount'];
+    $fld = ['not', 'status', 'image', 'user_activated', 'progress', 'is_recurrent'];
     $lnk = ['url', 'link', 'mobile', 'phone', 'email', 'whatsapp', 'website']
     ?>
-    <div class="card-body scrollbar scroller"  style="overflow-x: auto">
+    <div class="card-body scrollbar scroller" style="overflow-x: auto">
         {{ $results->links('livewire.widgets.admin.table.detail-pagination') }}
         <table class="table table-hover responsive">
             <thead class="thead-light">
@@ -50,13 +50,23 @@
                                     <span class="rounded-0 badge badge-{{ $result[$header] }}">
                                        {{ $_status[$result[$header]] }}
                                     </span>
+
                                 @else
                                     <span class="rounded-0 badge {{ $result[$header] }}">
                                        {{ $result[$header] }}
                                     </span>
                                 @endif
-                            @elseif($header == 'total')
-                                <p>S/ {{ number_format($result[$header], 2, '.', ',') }}</p>
+                            @elseif(in_array($header, ['is_recurrent']))
+                                @if(isset($_statusRecurrent) && !empty($_statusRecurrent))
+                                    <span
+                                        class="badge {{ (int)$result[$header]?'badge-success-1':'badge-danger-1' }}">
+                                       {{ $_statusRecurrent[$result[$header]] }}
+                                    </span>
+                                @endif
+                            @elseif(in_array($header, ['total', 'amount']))
+                                <p class="w-100 text-right">
+                                    {{ 'S/ ' . number_format($result[$header], 2, '.', ',') }}
+                                </p>
                             @elseif(in_array($header, ['mobile', 'phone']))
                                 <a href="tel:{{ $result[$header] }}">{{ $result[$header] }}</a>
                             @elseif(in_array($header, ['website', 'url', 'link']))
@@ -69,7 +79,7 @@
                             @elseif(in_array($header, ['progress']))
                                 <?php
                                 $prc = $result[$header] > 97 ? '#317347' : '#1D477A';
-                                if ($result->status == 'canceled'){
+                                if ($result->status == 'canceled') {
                                     $prc = '#f63c44';
                                 }
                                 ?>
@@ -84,7 +94,8 @@
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped"
                                              style="width:{{ $result[$header] }}%; background-color: {{ $prc }};"></div>
-                                        <div class="progress-value" style="color: {{ $prc }};"><span>{{ $result[$header] }}</span>%
+                                        <div class="progress-value" style="color: {{ $prc }};">
+                                            <span>{{ $result[$header] }}</span>%
                                         </div>
                                     </div>
                                 </div>

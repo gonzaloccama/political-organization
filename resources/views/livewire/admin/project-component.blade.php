@@ -183,7 +183,7 @@
                         language: 'es',
                     })
                     .then(editor => {
-                        editor.setData('');
+                        // editor.setData('');
                         editor.model.document.on('change:data', () => {
                             @this.
                             set(varModel, editor.getData());

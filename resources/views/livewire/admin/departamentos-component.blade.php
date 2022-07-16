@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <?php
-        $buttons = ['is_add' => $frame == 'index']; // button add
+        $buttons = ['is_add' => null]; // button add
         $mode = 'list'; // icon list or box
 
         $actions = [ //static actions table

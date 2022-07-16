@@ -1,6 +1,9 @@
 <div class="right-sidebar-mini right-sidebar">
     <?php
-    $users = \App\Models\User::orderBy('user_is_online', 'desc')->orderBy('user_last_activity', 'desc')->paginate(10);
+    $users = \App\Models\User::orderBy('user_is_online', 'desc')
+        ->orderBy('user_last_activity', 'desc')
+        ->whereNotIn('user_group', [1])
+        ->paginate(10);
     ?>
     <div class="right-sidebar-panel p-0">
         <div class="iq-card shadow-none">
@@ -24,7 +27,7 @@
                                     <a href="{{ route('profile', ['id' => base64_encode($user->id)]) }}"
                                        class="roboto weight-400">{{ $user->fullname }}</a>
                                 </h6>
-                                <p class="mb-0 ">{{ $user->user_role->name }}</p>
+                                <p class="mb-0 text-capitalize">{{ $user->user_role->name }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -34,7 +37,7 @@
                     <i class="ri-arrow-right-line side-left-icon"></i>
                     <i class="ri-arrow-left-line side-right-icon">
                         <span
-                            class="ml-3 d-inline-block">Close Menu</span>
+                            class="ml-3 d-inline-block">Cerrar Menú</span>
                     </i>
                 </div>
             </div>

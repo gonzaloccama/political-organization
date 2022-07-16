@@ -13,6 +13,25 @@ $wire = [
     'go' => '',
     'delete' => 'deleteConfirm(' . $result->id . ')',
 ];
+
+if (isset($actions['go']) && isset($navigateTo)) {
+    unset($wire['go']);
+    if ($navigateTo == 'in itself')
+        $wire = array_merge($wire, ['go' => 'navigateTo(' . $result->id . ')',]);
+    else
+        $wire = array_merge($wire, ['go' => 'navigateTo(' . $result[$navigateTo]->id . ')',]);
+}
+
+if (isset($switchAction) && !empty($switchAction)) {
+    $actions = [ //static actions table
+        'view' => $actions['view'],
+        'show' => $actions['show'],
+        'edit' => $actions['edit'],
+        'go' => $actions['go'],
+        'delete' => $result[$switchAction] > 0 || $result->status == 'active' ? null : $actions['delete'],
+    ];
+}
+
 ?>
 
 @foreach($actions as $key => $action)
@@ -31,4 +50,3 @@ $wire = [
 unset($icons);
 unset($wire);
 ?>
-

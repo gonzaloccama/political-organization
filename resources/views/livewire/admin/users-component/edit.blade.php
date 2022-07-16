@@ -97,7 +97,7 @@
 
             <div class="border text mt-4">
                 <div class="card-header">
-                    <ul class="nav nav-tabs nav-fill card-header-tabs " role="tablist">
+                    <ul class="nav nav-tabs nav-fill card-header-tabs border-bottom" role="tablist">
                         <li class="nav-item">
                             <a href="" class="nav-link {{ $profileInner == 'account' ? 'active':'' }}"
                                id="first-tab" wire:click.prevent="accountSection">
@@ -108,18 +108,6 @@
                             <a href="" class="nav-link {{ $profileInner == 'profile' ? 'active':'' }}"
                                id="second-tab" wire:click.prevent="profileSection">
                                 <h6><i class="simple-icon-user"></i>&nbsp;&nbsp;<b>PERFIL</b></h6>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link {{ $profileInner == 'privacy' ? 'active':'' }}"
-                               id="third-tab" wire:click.prevent="privacySection">
-                                <h6><i class="simple-icon-lock"></i>&nbsp;&nbsp;<b>PRIVACIDAD</b></h6>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link {{ $profileInner == 'security' ? 'active':'' }}"
-                               id="fourth-tab" wire:click.prevent="securitySection">
-                                <h6><i class="simple-icon-shield"></i>&nbsp;&nbsp;<b>SEGURIDAD</b></h6>
                             </a>
                         </li>
                     </ul>
@@ -135,6 +123,21 @@
 
 
                 </div>
+            </div>
+            <div class="text-right mt-4">
+                <button class="btn btn-secondary btn-sm"
+                        wire:click.prevent="closeFrame">
+                    <b><i class="simple-icon-logout"></i>&nbsp;&nbsp;Regresar</b>
+                </button>
+
+                <button class="btn btn-danger btn-sm">
+                    <b><i class="simple-icon-user-unfollow"></i>&nbsp;&nbsp;Eliminar usuario</b>
+                </button>
+
+                <button type="submit" class="btn btn-secondary btn-sm"
+                        wire:click.prevent="updateData">
+                    <b><i class="iconsminds-save"></i>&nbsp;&nbsp;Guardar cambios</b>
+                </button>
             </div>
 
         </div>

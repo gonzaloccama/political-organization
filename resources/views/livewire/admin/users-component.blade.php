@@ -13,8 +13,8 @@
 
         /*** status custom ***/
         $_statusIndex = [ // $_status or $_statusIndex
-            '0' => 'Activo',
-            '1' => 'Inactivo',
+            '0' => 'Inactivo',
+            '1' => 'Activo',
         ];
 
         $filters = $roles;
@@ -61,6 +61,7 @@
                 activeSelect2('#user_relationship', 'user_relationship');
                 activeSelect2('#user_region', 'user_region');
                 activeSelect2('#user_province', 'user_province');
+                activeSelect2('#user_current_city', 'user_current_city');
             });
 
             window.livewire.on('refreshPicker', () => {
@@ -68,7 +69,7 @@
             });
 
             window.livewire.on('notification', (mssg) => {
-                notificationSwal(`¡${mssg[0]}!`, 'rgba(0,67,124,0.76)');
+                notificationSwal(`¡${mssg[0]}!`, mssg[1] ? mssg[1] : 'rgba(0,67,124,0.76)');
             });
 
             window.livewire.on('deleteAlert', () => {

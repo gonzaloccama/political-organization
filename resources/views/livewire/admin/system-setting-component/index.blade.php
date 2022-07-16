@@ -1,165 +1,88 @@
 <div class="col-md-12">
-    <div class="icon-cards-row">
-        <?php
-        use App\Models\CashContribution;use App\Models\Expense;
-        $income_contribution = CashContribution::sum('amount');
-        $income = \App\Models\Income::sum('amount');
-        $all_income = $income_contribution + $income;
-        ?>
+    <style>
+        .menu-right li {
+            padding: 7px;
+            border: 1px solid #797979;
+            /*border-radius: 5px !important;*/
+        }
 
-        <div class="glide dashboard-income">
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="iconsminds-wallet"></i>
-                                <p class="card-text mb-0">Total de Ingresos (S/)</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ 'S/ ' . number_format($all_income, 2, '.', ',') }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="iconsminds-financial"></i>
-                                <p class="card-text mb-0">Ingresos por aportes (S/)</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ 'S/ ' . number_format($income_contribution, 2, '.', ',') }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="iconsminds-coins"></i>
-                                <p class="card-text mb-0">Otros ingresos (S/)</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ 'S/ ' . number_format($income, 2, '.', ',') }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+        .menu-right li:hover, .menu-right li a:hover, .menu-right li.active {
+            border-color: #1D477A;
+            box-shadow: 0 0 2px 0 #1D477A;
+            color: #1D477A !important;
+            cursor: pointer;
+        }
+
+        .menu-right li i {
+            padding-right: 10px;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{ asset('assets/logos/') . '/' . $edit_logo }}" class="img-thumbnail" alt="">
+
+                    <div class="menu-right mt-3">
+
+                        <div class="separator mt-4 mb-3"></div>
+
+                        <p class="text-muted text-small text-center">
+                            <b>Actualizado: </b><br>
+                            <?php
+                            echo ucfirst(Carbon\Carbon::parse($updated_at)
+                                ->locale('es')->translatedFormat('l d \d\e F \d\e\l Y | g:i:s A'));
+                            ?>
+                        </p>
+
+                        <div class="separator mt-3 mb-5"></div>
+
+                        <ul class="list-unstyled mb-2">
+                            <li class="{{ $draw == 'general' ? 'active' : '' }}" wire:click.prevent="content">
+                                <i class="simple-icon-screen-tablet"></i> GENERAL
+                            </li>
+                            <li class="{{ $draw == 'media' ? 'active' : '' }}" wire:click.prevent="content('media')">
+                                <i class="simple-icon-calendar"></i> REDES SOCIALES
+                            </li>
+                            <li class="{{ $draw == 'logo' ? 'active' : '' }}" wire:click.prevent="content('logo')">
+                                <i class="simple-icon-picture"></i> LOGOS
+                            </li>
+                            <li class="{{ $draw == 'mission-vision' ? 'active' : '' }}"
+                                wire:click.prevent="content('mission-vision')">
+                                <i class="simple-icon-speech"></i> MISIÓN Y VISIÓN
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="position-absolute card-top-buttons">
+                        <button class="btn btn-header-light icon-button mr-1" wire:click.prevent="closeFrame">
+                            <span style="color: white;position: absolute; margin-top: -17px; margin-left: -12px">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1"
+                                     fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </span>
+                        </button>
+                    </div>
+                    @include('livewire.admin.system-setting-component.contents.content-' . $draw)
+
+                    <div class="separator mb-4 mt-5"></div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-secondary btn-sm"
+                                wire:click.prevent="saveData">
+                            <b><i class="iconsminds-save"></i>&nbsp;&nbsp;Guardar cambios</b>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
-
-<div class="col-md-12">
-    <div class="icon-cards-row">
-        <?php
-
-        $expense = \App\Models\Expense::sum('amount');
-        $expense_today = Expense::whereBetween('created_at', [
-            Carbon\Carbon::today()->subDays(7)->format('Y-m-d') . ' 00:00:00',
-            Carbon\Carbon::today()->format('Y-m-d') . ' 23:59:59'
-        ])->sum('amount');
-
-        $balance = $all_income - $expense;
-        ?>
-        <div class="glide dashboard-expense">
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="simple-icon-layers"></i>
-                                <p class="card-text mb-0">Saldo (S/)</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ 'S / ' . number_format($balance, 2, '.', ',') }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="iconsminds-handshake"></i>
-                                <p class="card-text mb-0">Total de Egresos (S/)</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ 'S / ' . number_format($expense, 2, '.', ',') }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="iconsminds-calendar-4"></i>
-                                <p class="card-text mb-0">Egreso semanal (S/)</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ 'S / ' . number_format($expense_today, 2, '.', ',') }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<div class="col-md-12">
-    <div class="icon-cards-row">
-        <?php
-
-        $all_users = \App\Models\User::all()->count();
-        $baned_users = \App\Models\User::where('user_activated', '0')->where('user_banned', '1')->get()->count();
-        $posts = \App\Models\Post::all()->count();
-
-
-        ?>
-
-
-
-        <div class="glide dashboard-users">
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="iconsminds-business-mens"></i>
-                                <p class="card-text mb-0">Usuarios</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ $all_users }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="simple-icon-user-unfollow"></i>
-                                <p class="card-text mb-0">Inactivos</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ $baned_users }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="glide__slide">
-                        <a href="#" class="card">
-                            <div class="card-body text-center">
-                                <i class="iconsminds-notepad"></i>
-                                <p class="card-text mb-0">Publicaciones</p>
-                                <p class="lead text-center" style="font-size: 1.4rem !important;">
-                                    {{ $posts }}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
 </div>

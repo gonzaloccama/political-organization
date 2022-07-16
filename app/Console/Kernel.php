@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ClearLogFile::class,
+        Commands\TempFile::class,
     ];
 
     /**
@@ -25,6 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('optimize:clear')->everyThreeHours()->withoutOverlapping();
+        $schedule->command('log:clear')->twiceDaily(5, 19)->withoutOverlapping();
+        $schedule->command('temp:file')->twiceDaily(5, 19)->withoutOverlapping();
     }
 
     /**

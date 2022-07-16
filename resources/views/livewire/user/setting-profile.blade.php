@@ -55,6 +55,8 @@
             activeSelect2('#user_relationship', 'user_relationship');
             activeSelect2('#user_region', 'user_region');
             activeSelect2('#user_province', 'user_province');
+            activeSelect2('#user_current_city', 'user_current_city');
+
             activeFlatpickr('#user_birthdate', 'user_birthdate', 0);
 
             window.livewire.on('refreshSection', () => {
@@ -66,6 +68,7 @@
                 activeSelect2('#user_relationship', 'user_relationship');
                 activeSelect2('#user_region', 'user_region');
                 activeSelect2('#user_province', 'user_province');
+                activeSelect2('#user_current_city', 'user_current_city');
             });
         });
 

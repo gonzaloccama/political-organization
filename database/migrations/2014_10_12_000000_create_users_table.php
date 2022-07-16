@@ -15,12 +15,12 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('username')->nullable();
             $table->string('email')->unique();
             $table->string('phone', 9)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('email_verification_code')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
 
             $table->tinyInteger('user_group', false, true)->default(5);
@@ -45,12 +45,12 @@ class CreateUsersTable extends Migration
             $table->string('user_address')->nullable();
             $table->integer('user_country')->nullable();
             $table->integer('user_region')->nullable();
-            $table->string('user_province')->nullable();
+            $table->integer('user_province')->nullable();
             $table->date('user_birthdate')->nullable();
             $table->string('user_relationship')->nullable();
             $table->mediumText('user_biography')->nullable();
 
-            $table->string('user_current_city')->nullable();
+            $table->integer('user_current_city')->nullable();
             $table->string('user_hometown')->nullable();
             $table->string('user_social_facebook')->nullable();
             $table->string('user_social_whatsapp')->nullable();

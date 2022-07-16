@@ -3,6 +3,7 @@
 use App\Exports\UsersExport;
 use App\Models\Departamento;
 use App\Models\Gender;
+use App\Models\Region;
 use App\Models\Relationship;
 use App\Models\Role;
 use App\Models\User;
@@ -37,7 +38,6 @@ class UsersComponent extends BaseUserComponent
 
         $this->frame = 'index';
 
-        $this->provincias = [];
         $this->user_group = 6;
         $this->user_activated = 1;
     }
@@ -60,6 +60,7 @@ class UsersComponent extends BaseUserComponent
                 }
                 $query->orWhere(DB::raw("CONCAT(user_firstname, ' ', user_lastname)"), 'LIKE', '%' . $this->keyWord . '%');
             })
+            ->whereNotIn('user_group', [1])
             ->select('users.*')
             ->selectRaw('CONCAT(users.user_firstname," ",users.user_lastname) as fullname')
             ->paginate($this->limit);
@@ -69,7 +70,7 @@ class UsersComponent extends BaseUserComponent
         $data['genders'] = Gender::all();
         $data['relationships'] = Relationship::all();
         $data['roles'] = Role::where('id', '!=', 1)->get();
-        $data['regions'] = Departamento::all();
+        $data['regions'] = Region::all();
         $data['title'] = 'Usuarios';
 
         $this->emit('refreshContent');
@@ -79,7 +80,7 @@ class UsersComponent extends BaseUserComponent
 
     public function exportExcel()
     {
-        return Excel::download(new UsersExport(false), "usuarios.xlsx");
+//        return Excel::download(new UsersExport(false), "usuarios.xlsx");
     }
 
     public function exportPDF()

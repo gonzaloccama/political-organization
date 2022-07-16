@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Departamento;
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,7 +20,7 @@ class DepartamentosComponent extends BaseComponent
 
     public $headers = [
         'id' => 'ID',
-        'region' => 'Región',
+        'name' => 'Región',
         'ubigeo' => 'Ubigeo',
 //        'province' => 'Provincias',
 
@@ -59,20 +60,19 @@ class DepartamentosComponent extends BaseComponent
     {
         $rFormat = array_diff(array_keys($this->headers), ['not']);
         $findIn = [];
-        $table = 'region';
+        $table = 'regions';
 
         foreach ($rFormat as $item) {
             $findIn[] = $table . '.' . $item;
         }
 
-        $data['results'] = Departamento::orderBy($this->fieldSort, $this->sort)
-//            ->where('id', '!=', 1)
+        $data['results'] = Region::orderBy($this->fieldSort, $this->sort)
             ->where(function ($query) use ($findIn) {
                 foreach ($findIn as $in) {
                     $query->orWhere($in, 'LIKE', '%' . $this->keyWord . '%');
                 }
             })
-            ->paginate($this->limit);
+            ->get();
 
         $data['_title'] = 'Regiones';
 

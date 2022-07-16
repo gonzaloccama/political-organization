@@ -31,10 +31,9 @@ class BaseUserComponent extends BaseComponent
     public $user_address;
     public $user_region;
     public $user_province;
+    public $user_current_city;
     public $created_at;
     public $user_seen_at;
-
-    public $provinces;
 
     public $profileInner;
 
@@ -101,6 +100,7 @@ class BaseUserComponent extends BaseComponent
         $data->user_address = $this->user_address;
         $data->user_region = $this->user_region;
         $data->user_province = $this->user_province;
+        $data->user_current_city = $this->user_current_city;
         $data->user_seen_at = $this->user_seen_at;
 
 
@@ -137,6 +137,7 @@ class BaseUserComponent extends BaseComponent
         $this->user_address = $user->user_address;
         $this->user_region = $user->user_region;
         $this->user_province = $user->user_province;
+        $this->user_current_city = $user->user_current_city;
         $this->created_at = $user->created_at;
         $this->user_seen_at = $user->user_seen_at;
 
@@ -172,6 +173,7 @@ class BaseUserComponent extends BaseComponent
             $data->user_address = $this->user_address;
             $data->user_region = $this->user_region;
             $data->user_province = $this->user_province;
+            $data->user_current_city = $this->user_current_city;
             $data->user_seen_at = $this->user_seen_at;
 //
 //            dd($user);
@@ -217,12 +219,11 @@ class BaseUserComponent extends BaseComponent
         $this->user_address = null;
         $this->user_region = null;
         $this->user_province = null;
+        $this->user_current_city = null;
         $this->created_at = null;
         $this->user_seen_at = null;
 
-        $this->provinces = [];
         $this->profileInner = null;
-
 
         $this->resetErrorBag();
         $this->resetValidation();
@@ -273,6 +274,8 @@ class BaseUserComponent extends BaseComponent
             if ($data && $data->Nombre != '' && $data->Paterno != '') {
                 $this->user_firstname = mb_convert_case($data->Nombre, MB_CASE_TITLE, "UTF-8");
                 $this->user_lastname = mb_convert_case($data->Paterno . ' ' . $data->Materno, MB_CASE_TITLE, "UTF-8");
+            }else{
+                $this->emit('notification', ['No se encontró su busqueda por DNI', 'rgba(222,10,53,0.66)']);
             }
         }
     }
