@@ -68,7 +68,6 @@
                 ?>
                 @include('livewire.widgets.admin.form.select-h', $dt)
 
-
                 <?php
                 $dt = [
                     'name' => 'province',
@@ -114,19 +113,23 @@
                 ?>
                 @include('livewire.widgets.admin.form.input-h', $dt)
 
-                    <?php
-                    $dt = [
-                        'name' => 'files',
-                        'text' => 'Imagenes',
-                        'required' => 0,
-                        'type' => 'file',
-                        'accept' => 'image',
-                        'file' => $files,
-                        'multiple' => 1,
+                    @if($file)
+                        <div id="file"></div>
+                    @endif
+
+                <?php
+                $dt = [
+                    'name' => 'files',
+                    'text' => 'Imagenes',
+                    'required' => 0,
+                    'type' => 'file',
+                    'accept' => 'image',
+                    'file' => $files,
+                    'multiple' => 1,
 //                    'preview' => $editFile,
-                    ];
-                    ?>
-                    @include('livewire.widgets.admin.form.input-h', $dt)
+                ];
+                ?>
+                @include('livewire.widgets.admin.form.input-h', $dt)
 
             </form>
 

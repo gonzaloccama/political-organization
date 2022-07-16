@@ -16,8 +16,8 @@ class PlanMentionComponent extends BaseComponent
     public $abstract;
     public $content;
     public $population;
-    public $region;
-    public $province;
+    public $region = 21;
+    public $province = 165;
     public $town;
     public $location;
     public $file;
@@ -94,6 +94,9 @@ class PlanMentionComponent extends BaseComponent
 
         $data['results'] = PlanMention::orderBy($this->fieldSort, $this->sort)
             ->search($findIn, $this->keyWord)
+            ->leftJoin('towns', 'towns.id', '=', $table . '.town')
+            ->select($table . '.*', 'towns.name as town')
+//            ->where($table . '.town', 'LIKE', '%%')
             ->paginate($this->limit);
 
         $data['_title'] = 'Propuestas';
@@ -297,10 +300,14 @@ class PlanMentionComponent extends BaseComponent
     public function delete()
     {
         $data = PlanMention::find($this->deleteId);
-        $file = $data->attachment_file;
+        $file = $data->file;
+        $files = json_decode($data->files);
 
         if ($data->delete()) {
             $this->deleteFile($file, $file);
+            foreach ($files as $f){
+                $this->deleteFile($f, $f);
+            }
             $this->closeFrame();
         }
     }

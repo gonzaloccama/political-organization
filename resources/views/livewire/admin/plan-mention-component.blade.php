@@ -58,6 +58,7 @@
     <script src="{{ asset('assets/plugins/ckeditor5/translations/es.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/bootstrap-tagsinput.min.js') }}"></script>
 
+
     <script type="text/javascript">
         $(document).ready(function () {
 
